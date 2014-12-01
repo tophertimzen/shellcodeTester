@@ -35,6 +35,7 @@
             this.x64 = new System.Windows.Forms.RadioButton();
             this.x86 = new System.Windows.Forms.RadioButton();
             this.fireSc = new System.Windows.Forms.Button();
+            this.showAddresses = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // disasmBT
@@ -60,7 +61,7 @@
             this.disasmScLB.FormattingEnabled = true;
             this.disasmScLB.Location = new System.Drawing.Point(296, 10);
             this.disasmScLB.Name = "disasmScLB";
-            this.disasmScLB.Size = new System.Drawing.Size(283, 394);
+            this.disasmScLB.Size = new System.Drawing.Size(283, 381);
             this.disasmScLB.TabIndex = 2;
             // 
             // x64
@@ -97,12 +98,24 @@
             this.fireSc.UseVisualStyleBackColor = true;
             this.fireSc.Click += new System.EventHandler(this.fireSc_Click);
             // 
+            // showAddresses
+            // 
+            this.showAddresses.AutoSize = true;
+            this.showAddresses.Location = new System.Drawing.Point(386, 397);
+            this.showAddresses.Name = "showAddresses";
+            this.showAddresses.Size = new System.Drawing.Size(130, 17);
+            this.showAddresses.TabIndex = 7;
+            this.showAddresses.Text = "Show Address Offsets";
+            this.showAddresses.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.showAddresses.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.ClientSize = new System.Drawing.Size(591, 416);
+            this.ClientSize = new System.Drawing.Size(591, 421);
+            this.Controls.Add(this.showAddresses);
             this.Controls.Add(this.fireSc);
             this.Controls.Add(this.x86);
             this.Controls.Add(this.x64);
@@ -126,6 +139,7 @@
         private System.Windows.Forms.RadioButton x64;
         private System.Windows.Forms.RadioButton x86;
         private System.Windows.Forms.Button fireSc;
+        private System.Windows.Forms.CheckBox showAddresses;
     }
 }
 

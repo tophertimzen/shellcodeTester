@@ -10,7 +10,14 @@ namespace shellcodeTester
 {
     class disassemble
     {
-        public void disassembleSC(byte[] disasmBytes, uint architecture, System.Windows.Forms.ListBox disasmBox)
+        /// <summary>
+        /// Disassemble a given piece of shellcode. 
+        /// </summary>
+        /// <param name="disasmBytes">The byte array to disassemble</param>
+        /// <param name="architecture">The architecture to target. Either 32 or 64 bit Windows</param>
+        /// <param name="disasmBox">The listbox to place the disassembly</param>
+        /// <param name="showOffsets">Boolean to determine whether or not to display address offsets in the disassembly listing.</param>
+        public void disassembleSC(byte[] disasmBytes, uint architecture, System.Windows.Forms.ListBox disasmBox, bool showOffsets)
         {            
             var disasm = new Disasm();
             disasm.Options = 0x200;//display in NASM syntax 
@@ -25,7 +32,6 @@ namespace shellcodeTester
             }
 
             int size = disasmBytes.Length;
-            //System.Runtime.InteropServices.Marshal.SizeOf(disasmBytes[0]) * disasmBytes.Length;
             IntPtr executionPointer = System.Runtime.InteropServices.Marshal.AllocHGlobal(size);
             System.Runtime.InteropServices.Marshal.Copy(disasmBytes, 0, executionPointer, size);
             IntPtr startingEip = executionPointer;
@@ -35,6 +41,7 @@ namespace shellcodeTester
             var disasmPtr = Marshal.AllocHGlobal(Marshal.SizeOf(disasm));
             disasmBox.Items.Add("Disassembled shellcode with " + architecture + "bit");
             var EIPrange = (executionPointer.ToInt64() + size/2);
+
             try
             {               
                 while (disasm.EIP.ToInt64()  < EIPrange)
@@ -42,11 +49,17 @@ namespace shellcodeTester
                     System.Runtime.InteropServices.Marshal.StructureToPtr(disasm, disasmPtr, false);
                     result = BeaEngine.Disasm(disasmPtr);
                     Marshal.PtrToStructure(disasmPtr, disasm);
-                   // if (result == (int)BeaConstants.SpecialInfo.UNKNOWN_OPCODE)
-                   //     break;
+                    if (result == (int)BeaConstants.SpecialInfo.UNKNOWN_OPCODE)
+                    {
+                        disasmBox.Items.Add("Unknown opcode error @ " + disasm.EIP.ToString("X"));
+                        break;
+                    }
 
-                    disasmBox.Items.Add(disasm.CompleteInstr.ToString());
-
+                    if (showOffsets)
+                        disasmBox.Items.Add(disasm.EIP.ToString("X")+ "h : " + disasm.CompleteInstr.ToString());
+                    else                    
+                        disasmBox.Items.Add(disasm.CompleteInstr.ToString());
+                    
                     disasm.EIP = new IntPtr(disasm.EIP.ToInt64() + result);
                 }
             }
