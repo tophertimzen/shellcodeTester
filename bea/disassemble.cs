@@ -34,10 +34,9 @@ namespace shellcodeTester
             int result;
             var disasmPtr = Marshal.AllocHGlobal(Marshal.SizeOf(disasm));
             disasmBox.Items.Add("Disassembled shellcode with " + architecture + "bit");
-            var EIPrange = (executionPointer.ToInt64() + size);
+            var EIPrange = (executionPointer.ToInt64() + size/2);
             try
-            {
-               
+            {               
                 while (disasm.EIP.ToInt64()  < EIPrange)
                 {                  
                     System.Runtime.InteropServices.Marshal.StructureToPtr(disasm, disasmPtr, false);
@@ -52,7 +51,9 @@ namespace shellcodeTester
                 }
             }
             catch
-            { }
+            {
+                disasmBox.Items.Add("Something went wrong with disassembly");
+            }
         }
     }
 }
