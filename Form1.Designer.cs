@@ -40,6 +40,7 @@
             // 
             // disasmBT
             // 
+     
             this.disasmBT.Location = new System.Drawing.Point(61, 302);
             this.disasmBT.Name = "disasmBT";
             this.disasmBT.Size = new System.Drawing.Size(184, 23);
@@ -50,6 +51,7 @@
             // 
             // insertScTB
             // 
+         
             this.insertScTB.Location = new System.Drawing.Point(7, 12);
             this.insertScTB.Multiline = true;
             this.insertScTB.Name = "insertScTB";
@@ -66,7 +68,7 @@
             // 
             // x64
             // 
-            this.x64.AutoSize = true;
+         
             this.x64.Location = new System.Drawing.Point(208, 344);
             this.x64.Name = "x64";
             this.x64.Size = new System.Drawing.Size(37, 17);
@@ -78,7 +80,7 @@
             // 
             // x86
             // 
-            this.x86.AutoSize = true;
+         
             this.x86.Location = new System.Drawing.Point(61, 344);
             this.x86.Name = "x86";
             this.x86.Size = new System.Drawing.Size(37, 17);
@@ -100,7 +102,7 @@
             // 
             // showAddresses
             // 
-            this.showAddresses.AutoSize = true;
+    
             this.showAddresses.Location = new System.Drawing.Point(386, 397);
             this.showAddresses.Name = "showAddresses";
             this.showAddresses.Size = new System.Drawing.Size(130, 17);
@@ -111,6 +113,7 @@
             // 
             // Form1
             // 
+
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
@@ -125,7 +128,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Test Shellcode!";
-            this.TransparencyKey = System.Drawing.Color.Black;
             this.ResumeLayout(false);
             this.PerformLayout();
 
