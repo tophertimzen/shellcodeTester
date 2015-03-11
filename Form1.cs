@@ -14,7 +14,7 @@ namespace shellcodeTester
         public Form1()
         {
             InitializeComponent();
-            disasmScLB.Items.Add("Disasembled shellcode will appear here");            
+            disasmSc_RTB.AppendText("Disasembled shellcode will appear here\n");            
         }
 
         byte[] shellcode = new byte[0];
@@ -23,11 +23,12 @@ namespace shellcodeTester
         private void disasmBT_Click(object sender, EventArgs e)
         {
             bool addressOffsets = false;
-            disasmScLB.Items.Clear();
-            string insertedShellcode = insertScTB.Text;
+            disasmSc_RTB.Clear();
+            string insertedShellcode = insertScRTB.Text;
             insertedShellcode = insertedShellcode.Replace("\\x", string.Empty);
             insertedShellcode = insertedShellcode.Replace("0x", string.Empty);
             insertedShellcode = insertedShellcode.Replace(", ", string.Empty);
+            insertedShellcode = insertedShellcode.Replace("\n", string.Empty);
             insertedShellcode = System.Text.RegularExpressions.Regex.Replace(insertedShellcode, @"\W+", "");
             shellcode = new byte[insertedShellcode.Length];
             try
@@ -40,7 +41,7 @@ namespace shellcodeTester
                     if (showAddresses.Checked)
                         addressOffsets = true;
                     disassemble disasm = new disassemble();
-                    disasm.disassembleSC(shellcode, architecture, disasmScLB, addressOffsets);
+                    disasm.disassembleSC(shellcode, architecture, disasmSc_RTB, addressOffsets);
                 }
                 else
                 {
